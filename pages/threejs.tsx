@@ -4,12 +4,12 @@ import * as THREE from 'three'
 
 import styles from '../styles/Threejs.module.css'
 
-let scene = null;
-let camera = null;
-let renderer = null;
+let scene: THREE.Scene; 
+let camera: THREE.Camera;
+let renderer: THREE.Renderer;
 
-function Threejs(): NextPage {
-  const root = useRef();
+const ThreejsPage: NextPage = () => {
+  const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scene = new THREE.Scene();
@@ -18,7 +18,7 @@ function Threejs(): NextPage {
     
     renderer.setSize( window.innerWidth, window.innerHeight );
     
-    root.current.appendChild( renderer.domElement );
+    root?.current?.appendChild( renderer.domElement );
     
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
     const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
@@ -31,7 +31,7 @@ function Threejs(): NextPage {
       requestAnimationFrame( animate );
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
-      renderer.render( scene, camera );
+      renderer?.render( scene, camera );
     };
     
     animate();
@@ -45,4 +45,4 @@ function Threejs(): NextPage {
   )
 }
 
-export default Threejs
+export default ThreejsPage
